@@ -1,0 +1,43 @@
+public class ConjuntoAltavoces extends ControlServicio implements Modificable {
+    private String pistaReproduciendo;
+    private int volumen;
+
+    public ConjuntoAltavoces(String pistaReproduciendo, String nombreServicio) {
+        this(pistaReproduciendo, nombreServicio, MIN);
+    }
+
+    public ConjuntoAltavoces(String pistaReproduciendo, String nombreServicio, int volumen) {
+        super(nombreServicio);
+        this.pistaReproduciendo = pistaReproduciendo;
+        this.volumen = volumen;
+    }
+
+    public String getPistaReproduciendo() {
+        return pistaReproduciendo;
+    }
+
+    public int getVolumen() {
+        return volumen;
+    }
+
+    @Override
+    public void aumentar() throws ValorMaximoException {
+        if (volumen == MAX) {
+            throw new ValorMaximoException("El volumen de reproducción ya está en su valor máximo (100%)");
+        }
+        volumen++;
+    }
+
+    @Override
+    public void disminuir() throws ValorMinimoException {
+        if (volumen == MIN) {
+            throw new ValorMinimoException("El volumen de reproducción ya está en su valor mínimo (0%)");
+        }
+        volumen--;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "\nTipo de servicio: Altavoz\nConjunto Altavoces\nSonido Reproduciendo: " + pistaReproduciendo + "\nVolumen: " + volumen;
+    }
+}
